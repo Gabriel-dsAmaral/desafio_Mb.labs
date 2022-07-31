@@ -40,13 +40,14 @@ export const EventCard = ({ event }: EventCardProps) => {
 
   return (
     <Flex
+      margin="5px 5px 5px 5px"
       borderRadius="15px"
       boxShadow={"0px 2px 2px"}
       flexDirection="column"
       alignItems="start"
       justifyContent="start"
-      w="250px"
-      h="390px"
+      w="300px"
+      h="400px"
     >
       <Img borderRadius="15px" w="100%" h="150px" src={event.icon_url} />
       <Text
@@ -102,13 +103,13 @@ export const EventCard = ({ event }: EventCardProps) => {
         <Button
           border="none"
           bg="#3C20B5"
-          w="180px"
-          h="40px"
+          w="200px"
+          h="50px"
           borderRadius="4px"
           boxShadow={"0px 2px 2px"}
           color="#FFFFFFFF"
           fontWeight="bold"
-          fontSize="16px"
+          fontSize="18px"
           onClick={() => goToEvent()}
           _hover={{
             cursor: "pointer",
