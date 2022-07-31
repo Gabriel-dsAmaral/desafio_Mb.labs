@@ -1,25 +1,8 @@
-import {
-  IconButton,
-  useBreakpointValue,
-  Flex,
-  useColorMode,
-  useDisclosure,
-  Img,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useUser } from "../../providers/UserProvider";
-import {
-  BiUserCircle,
-  BiLogOut,
-  BiSearchAlt,
-  BiMoon,
-  BiSun,
-  BiHome,
-  BiUserPlus,
-  BiLogIn,
-} from "react-icons/bi";
+
 import { Logo } from "../logo";
 
 export const Header = () => {

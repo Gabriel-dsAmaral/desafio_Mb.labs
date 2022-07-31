@@ -21,11 +21,11 @@ interface Tickets {
 }
 
 interface EventData {
-  id: number;
+  id: string;
   title: string;
   owner_name: string;
   banner_url: string;
-  image_url: string;
+  icon_url: string;
   is_remote: boolean;
   description: string;
   address: Address;
