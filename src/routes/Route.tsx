@@ -21,7 +21,7 @@ export const Route = ({
         isPrivate === !!token ? (
           <Component />
         ) : (
-          <Redirect to={isPrivate ? "/" : "/user"} />
+          <Redirect to={isPrivate ? "/" : "/profile"} />
         )
       }
     />

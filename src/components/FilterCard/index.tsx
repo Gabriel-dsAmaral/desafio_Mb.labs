@@ -13,15 +13,19 @@ export const FilterCard = ({ image, title }: FilterCardProps) => {
       border="2px solid #2359A9"
       borderRadius="7px"
       w="200px"
-      h="50px"
+      h="60px"
       padding="10px"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
+      _hover={{
+        cursor: "pointer",
+        transform: "scale(1.01)",
+      }}
     >
       <Text
         marginLeft="5px"
-        fontSize="21px"
+        fontSize="17px"
         fontWeight="bold"
         fontFamily="sans-serif"
         color="#000000"
@@ -29,7 +33,7 @@ export const FilterCard = ({ image, title }: FilterCardProps) => {
       >
         {title}
       </Text>
-      <Img marginTop="5px" w="65px" h="65px" src={image} />
+      <Img w="50px" h="50px" src={image} />
     </Flex>
   );
 };

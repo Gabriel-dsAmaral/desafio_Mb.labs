@@ -59,7 +59,6 @@ export const EventCard = ({ event }: EventCardProps) => {
         {event.title}
       </Text>
       <Text
-        marginTop="-5px"
         marginLeft="7px"
         fontSize="16px"
         fontWeight="bold"
@@ -69,7 +68,6 @@ export const EventCard = ({ event }: EventCardProps) => {
         {event.owner_name}
       </Text>
       <Text
-        marginTop="-5px"
         marginLeft="7px"
         fontSize="30px"
         fontWeight="bold"
@@ -79,18 +77,17 @@ export const EventCard = ({ event }: EventCardProps) => {
         {event.tickets.price > 0 ? `R$${event.tickets.price},00` : "Gratuito"}
       </Text>
       <Text
-        marginTop="-20px"
         marginLeft="7px"
         fontSize="16px"
         fontFamily="sans-serif"
         color="#000000"
       >
-        {event.tickets.avaible_quantity === -77
+        {event.tickets.avaible_quantity === -777
           ? "Ingressos Ilimitados"
           : `Ingressos Restantes: ${event.tickets.avaible_quantity}`}
       </Text>
       <Text
-        marginTop="-5px"
+        marginTop="5px"
         marginLeft="7px"
         fontSize="16px"
         fontWeight="bold"
@@ -101,6 +98,7 @@ export const EventCard = ({ event }: EventCardProps) => {
       </Text>
       <Flex justifyContent="center" w="100%">
         <Button
+          marginTop="15px"
           border="none"
           bg="#3C20B5"
           w="200px"

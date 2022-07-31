@@ -12,12 +12,39 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
+interface Address {
+  district: string;
+  zipCode: string;
+  number: number;
+  street: string;
+  city: string;
+}
+
+interface Tickets {
+  sold_amount: number;
+  price: number;
+  avaible_quantity: number;
+}
+
+interface EventData {
+  id: string;
+  title: string;
+  owner_name: string;
+  banner_url: string;
+  icon_url: string;
+  is_remote: boolean;
+  description: string;
+  address: Address;
+  tickets: Tickets;
+}
+
 interface User {
   id: string;
   email: string;
   user_name: string;
   avatar_url: string;
   banner_url: string;
+  my_events: EventData[];
 }
 
 interface SighInCredentials {
@@ -49,6 +76,7 @@ interface UserContextData {
   EditUser: (credentials: EditUserCredentials) => Promise<void>;
   addEvent: (eventId: string) => Promise<void>;
   removeEvent: (eventId: string) => Promise<void>;
+  getMyUser: () => void;
 }
 
 interface UserState {
@@ -73,7 +101,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     return {} as UserState;
   });
 
-  const signIn = useCallback(async ({ email, password }: SighInCredentials) => {
+  const signIn = async ({ email, password }: SighInCredentials) => {
     const responseToken = await api.post("/api/signin", { email, password });
 
     const { token } = responseToken.data;
@@ -90,53 +118,47 @@ const UserProvider = ({ children }: UserProviderProps) => {
     localStorage.setItem("@desafio:mb.labs:acessToken", token);
     localStorage.setItem("@desafio:mb.labs:userId", userId);
     setData({ token, user, userId });
-  }, []);
+  };
 
-  const signOut = useCallback(() => {
+  const signOut = () => {
     localStorage.clear();
 
     setData({} as UserState);
-  }, []);
+  };
 
-  const sigNup = useCallback(
-    async ({
+  const sigNup = async ({
+    user_name,
+    email,
+    password,
+    avatar_url,
+    banner_url,
+  }: SigNupCredentials) => {
+    await api.post("/api/signup", {
       user_name,
       email,
       password,
       avatar_url,
       banner_url,
-    }: SigNupCredentials) => {
-      await api.post("/api/signup", {
-        user_name,
-        email,
-        password,
-        avatar_url,
-        banner_url,
-      });
-    },
-    []
-  );
+    });
+  };
 
-  const EditUser = useCallback(
-    async ({
-      user_name,
-      avatar_url,
-      banner_url,
-      email,
-    }: EditUserCredentials) => {
-      await api.patch(
-        `/api/users/${localStorage.getItem("@desafio:mb.labs:userId")}`,
-        { user_name, avatar_url, banner_url, email },
-        {
-          headers: { Authorization: `token ${data.token}` },
-        }
-      );
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  const EditUser = async ({
+    user_name,
+    avatar_url,
+    banner_url,
+    email,
+  }: EditUserCredentials) => {
+    await api.patch(
+      `/api/users/${localStorage.getItem("@desafio:mb.labs:userId")}`,
+      { user_name, avatar_url, banner_url, email },
+      {
+        headers: { Authorization: `token ${data.token}` },
+      }
+    );
+    window.location.reload();
+  };
 
-  const addEvent = useCallback(async (eventId: string) => {
+  const addEvent = async (eventId: string) => {
     await api.patch(
       `/api/users/event/add/${eventId}`,
       {},
@@ -144,10 +166,11 @@ const UserProvider = ({ children }: UserProviderProps) => {
         headers: { Authorization: `token ${data.token}` },
       }
     );
+    window.location.reload();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
-  const removeEvent = useCallback(async (eventId: string) => {
+  const removeEvent = async (eventId: string) => {
     await api.patch(
       `/api/users/event/remove/${eventId}`,
       {},
@@ -156,8 +179,27 @@ const UserProvider = ({ children }: UserProviderProps) => {
       }
     );
     window.location.reload();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
+
+  const getMyUser = async () => {
+    const response = await api.get("/api/users", {
+      headers: {
+        Authorization: `token ${localStorage.getItem(
+          "@desafio:mb.labs:acessToken"
+        )}`,
+      },
+    });
+
+    const decoded = jwt_decode<any>(data.token);
+    const userId = decoded.id;
+    const user = response.data;
+    const token = data.token;
+
+    localStorage.setItem("@desafio:mb.labs:user", JSON.stringify(user));
+    localStorage.setItem("@desafio:mb.labs:acessToken", token);
+    localStorage.setItem("@desafio:mb.labs:userId", userId);
+    setData({ token, user, userId });
+  };
 
   return (
     <UserContext.Provider
@@ -170,6 +212,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         EditUser,
         addEvent,
         removeEvent,
+        getMyUser,
       }}
     >
       {children}
