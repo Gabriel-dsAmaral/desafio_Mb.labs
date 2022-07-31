@@ -1,6 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "../../components/header";
 import { EventCardProfile } from "../../components/EventCardProfile";
+import { ContainerEventCard } from "../../components/ContainerEventCard";
 
 const event = {
   id: "87e81810-fa30-4754-87bc-2a8964b83167",
@@ -38,6 +39,7 @@ export const Home = () => {
       flexDirection="column"
     >
       <Header />
+      <ContainerEventCard />
     </Flex>
   );
 };
