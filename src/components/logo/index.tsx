@@ -15,7 +15,7 @@ export const Logo = () => {
       w="155px"
       h="40px"
       borderRadius="15px"
-      boxShadow={"0px 4px 4px"}
+      boxShadow={"0px 2px 2px"}
       alignItems="center"
       justifyContent="center"
       marginLeft="30px"
