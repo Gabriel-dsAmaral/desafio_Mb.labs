@@ -18,7 +18,7 @@ export const ContainerEventCard = () => {
       flexDirection="column"
       alignItems="center"
       maxWidth="950px"
-      maxHeight="555px"
+      maxHeight="515px"
       overflowY="auto"
       overflowX="hidden"
     >
@@ -26,7 +26,7 @@ export const ContainerEventCard = () => {
         w="98%"
         backgroundColor="#190d4f"
         color="#ffffff"
-        font-fontWeight="bold"
+        fontWeight="bold"
         fontFamily="sans-serif"
         padding="10px"
         fontSize="22px"
