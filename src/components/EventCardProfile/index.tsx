@@ -1,5 +1,6 @@
 import { Button, Flex, Img, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import { useUser } from "../../providers/UserProvider";
 
 interface Address {
   district: string;
@@ -34,6 +35,8 @@ interface EventCardProps {
 export const EventCardProfile = ({ event }: EventCardProps) => {
   const history = useHistory();
 
+  const { removeEvent } = useUser();
+
   const goToEvent = () => {
     history.push(`/event/${event.id}`);
   };
@@ -46,7 +49,7 @@ export const EventCardProfile = ({ event }: EventCardProps) => {
       alignItems="start"
       justifyContent="start"
       w="250px"
-      h="290px"
+      h="300px"
     >
       <Img borderRadius="15px" w="100%" h="150px" src={event.icon_url} />
       <Text
@@ -68,8 +71,15 @@ export const EventCardProfile = ({ event }: EventCardProps) => {
         {event.owner_name}
       </Text>
 
-      <Flex justifyContent="center" w="100%">
+      <Flex
+        align="center"
+        flexDirection="column"
+        justifyContent="center"
+        w="100%"
+      >
         <Button
+          marginTop="10px"
+          marginBottom="10px"
           border="none"
           bg="#3C20B5"
           w="180px"
@@ -86,6 +96,25 @@ export const EventCardProfile = ({ event }: EventCardProps) => {
           }}
         >
           Mais Informações
+        </Button>
+
+        <Button
+          border="none"
+          bg="#7B0126"
+          w="180px"
+          h="40px"
+          borderRadius="4px"
+          boxShadow={"0px 2px 2px"}
+          color="#FFFFFFFF"
+          fontWeight="bold"
+          fontSize="16px"
+          onClick={() => removeEvent(event.id)}
+          _hover={{
+            cursor: "pointer",
+            transform: "scale(1.01)",
+          }}
+        >
+          Remover Evento
         </Button>
       </Flex>
     </Flex>

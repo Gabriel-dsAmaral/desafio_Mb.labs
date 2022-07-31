@@ -12,12 +12,8 @@ export const Header = () => {
 
   const { token, signOut, signIn } = useUser();
 
-  const goHome = () => {
-    history.push("/");
-  };
-
   const goUser = () => {
-    history.push("/user");
+    history.push("/profile");
   };
 
   return (
@@ -65,6 +61,7 @@ export const Header = () => {
                   cursor: "pointer",
                   transform: "scale(1.05)",
                 }}
+                onClick={() => goUser()}
               >
                 Perfil
               </Text>
@@ -90,7 +87,7 @@ export const Header = () => {
                 fontFamily="sans-serif"
                 color="#FFFFFFFF"
                 onClick={() =>
-                  signIn({ email: "gabriell@mail.com", password: "1660" })
+                  signIn({ email: "gabriel@mail.com", password: "1660" })
                 }
                 _hover={{
                   cursor: "pointer",
