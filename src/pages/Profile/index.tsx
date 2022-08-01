@@ -1,23 +1,35 @@
-import { Box, Center, Flex, IconButton, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  IconButton,
+  Image,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { ContainerProfileEventCard } from "../../components/ContainerProfileEventCard";
 import { Header } from "../../components/header";
 import { useUser } from "../../providers/UserProvider";
+import { Update } from "../../components/Modals/UpdateUser";
 
 export const Profile = () => {
   const { user } = useUser();
+
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
 
   return (
     <>
       <Header />
 
-      <Box
-        background={`linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),url(${user.banner_url})`}
-        height="330px"
-        width="100%"
-        zIndex="1"
-      />
+      <Image src={user.banner_url} height="330px" width="100%" zIndex="1" />
+
+      <Update isOpen={isModalOpen} onClose={onModalClose} />
       <Flex
         width="100%"
         flexDirection="column"
@@ -66,7 +78,7 @@ export const Profile = () => {
               right={["0px", "0px", "23px", "23px"]}
               margin-top={["4px", "4px", "0px", "0px"]}
               bgColor="#3C20B5"
-              //   onClick={onModalOpen}
+              onClick={onModalOpen}
             >
               <Text
                 color="black"
@@ -91,7 +103,6 @@ export const Profile = () => {
           </Flex>
         </Flex>
         <ContainerProfileEventCard />
-        {/* <UserEdits isOpen={isModalOpen} onClose={onModalClose} /> */}
       </Flex>
     </>
   );

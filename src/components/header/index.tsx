@@ -1,9 +1,11 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useUser } from "../../providers/UserProvider";
+import { SignIn } from "../Modals/SignIn";
 
 import { Logo } from "../logo";
+import { Signup } from "../Modals/Signup";
 
 export const Header = () => {
   const [showSearchBox, setShowSearchBox] = useState(false);
@@ -15,6 +17,23 @@ export const Header = () => {
   const goUser = () => {
     history.push("/profile");
   };
+
+  const handleSingOut = () => {
+    history.push("/");
+    signOut();
+  };
+
+  const {
+    isOpen: isModalSignInOpen,
+    onOpen: onModalSignInOpen,
+    onClose: onModalSignInClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isModalSignupOpen,
+    onOpen: onModalSignupOpen,
+    onClose: onModalSignupClose,
+  } = useDisclosure();
 
   return (
     <Flex
@@ -31,6 +50,9 @@ export const Header = () => {
       <>
         <Logo />
 
+        <SignIn isOpen={isModalSignInOpen} onClose={onModalSignInClose} />
+        <Signup isOpen={isModalSignupOpen} onClose={onModalSignupClose} />
+
         <Flex
           justifyContent="space-between"
           alignItems="center"
@@ -43,7 +65,7 @@ export const Header = () => {
                 fontWeight="bold"
                 fontFamily="sans-serif"
                 color="#FFFFFFFF"
-                onClick={() => signOut()}
+                onClick={handleSingOut}
                 _hover={{
                   cursor: "pointer",
                   transform: "scale(1.05)",
@@ -73,6 +95,7 @@ export const Header = () => {
                 fontWeight="bold"
                 fontFamily="sans-serif"
                 color="#FFFFFFFF"
+                onClick={onModalSignupOpen}
                 _hover={{
                   cursor: "pointer",
                   transform: "scale(1.05)",
@@ -86,9 +109,7 @@ export const Header = () => {
                 fontWeight="bold"
                 fontFamily="sans-serif"
                 color="#FFFFFFFF"
-                onClick={() =>
-                  signIn({ email: "gabriel@mail.com", password: "1660" })
-                }
+                onClick={onModalSignInOpen}
                 _hover={{
                   cursor: "pointer",
                   transform: "scale(1.05)",
