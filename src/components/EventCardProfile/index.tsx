@@ -43,6 +43,8 @@ export const EventCardProfile = ({ event }: EventCardProps) => {
 
   return (
     <Flex
+      marginBottom="10px"
+      marginRight="10px"
       borderRadius="15px"
       boxShadow={"0px 2px 2px"}
       flexDirection="column"
