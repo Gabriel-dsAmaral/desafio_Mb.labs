@@ -13,6 +13,7 @@ export const ContainerEventCard = () => {
   return (
     <Flex
       border="1px solid #2359A9"
+      marginRight="15px"
       borderRadius="10px"
       padding="12px"
       flexDirection="column"
@@ -36,7 +37,13 @@ export const ContainerEventCard = () => {
       >
         Eventos
       </Box>
-      <Flex display="inline-flex" justifyContent="space-around" flexWrap="wrap">
+      <Flex
+        flexDirection={["column", "column", "row", "row"]}
+        display={["flex", "flex", "inline-flex", "inline-flex"]}
+        justifyContent="space-around"
+        flexWrap="wrap"
+        overflowX="auto"
+      >
         {allEvents.map((event) => {
           return <EventCard key={event.id} event={event} />;
         })}

@@ -11,7 +11,9 @@ import Tudo from "../../assets/Tudo.svg";
 export const ContainerFilterCard = () => {
   return (
     <Flex
+      display={["none", "none", "flex", "flex"]}
       marginRight="15px"
+      marginLeft="15px"
       border="1px solid #2359A9"
       borderRadius="10px"
       padding="12px"

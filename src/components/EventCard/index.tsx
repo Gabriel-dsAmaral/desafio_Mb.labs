@@ -46,7 +46,7 @@ export const EventCard = ({ event }: EventCardProps) => {
       flexDirection="column"
       alignItems="start"
       justifyContent="start"
-      w="300px"
+      minWidth="300px"
       h="400px"
     >
       <Img borderRadius="15px" w="100%" h="150px" src={event.icon_url} />

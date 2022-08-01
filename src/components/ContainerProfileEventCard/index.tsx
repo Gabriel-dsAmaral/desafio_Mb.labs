@@ -46,7 +46,13 @@ export const ContainerProfileEventCard = () => {
       >
         Meus Eventos
       </Box>
-      <Flex display="inline-flex" justifyContent="space-around" flexWrap="wrap">
+      <Flex
+        flexDirection={["column", "column", "row", "row"]}
+        display={["flex", "flex", "inline-flex", "inline-flex"]}
+        justifyContent="space-around"
+        flexWrap="wrap"
+        overflowX="auto"
+      >
         {haveEvents ? (
           user.my_events.map((event) => {
             return <EventCardProfile key={event.id} event={event} />;
