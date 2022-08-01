@@ -18,6 +18,11 @@ export const Header = () => {
     history.push("/profile");
   };
 
+  const handleSingOut = () => {
+    history.push("/");
+    signOut();
+  };
+
   const {
     isOpen: isModalSignInOpen,
     onOpen: onModalSignInOpen,
@@ -60,7 +65,7 @@ export const Header = () => {
                 fontWeight="bold"
                 fontFamily="sans-serif"
                 color="#FFFFFFFF"
-                onClick={() => signOut()}
+                onClick={handleSingOut}
                 _hover={{
                   cursor: "pointer",
                   transform: "scale(1.05)",
